@@ -1,13 +1,14 @@
-const express = require('express');
-const path = require('path');
-const app = express();
-const PORT = process.env.PORT || 3000;
+export default {
+  async fetch(request) {
+    const url = new URL(request.url);
 
-// Serve the static JSON file
-app.get('/keywordsdata.json', (req, res) => {
-  res.sendFile(path.join(__dirname, 'data', 'keywordsdata.json'));
-});
+    if (url.pathname === "/data/keywordsdata.json") {
+      const json = await fetch("https://raw.githubusercontent.com/YOUR_GITHUB_USERNAME/YOUR_REPO_NAME/main/data/keywordsdata.json");
+      return new Response(await json.text(), {
+        headers: { "Content-Type": "application/json" },
+      });
+    }
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+    return new Response("Not Found", { status: 404 });
+  },
+};
