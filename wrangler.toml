@@ -1,0 +1,3 @@
+name = "keywords-worker"
+main = "server.js"
+compatibility_date = "2025-07-10"
