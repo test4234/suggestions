@@ -1,5 +1,5 @@
 // Replace this JSON object with your actual keywordsdata.json content
-const keywordsData = [ // <--- Remove the opening '{' here
+const keywordsData = [
   {
     "_id": {
       "$oid": "68593f1c1b010d7b8e345770"
@@ -539,16 +539,33 @@ const keywordsData = [ // <--- Remove the opening '{' here
     ],
     "image": "https://ik.imagekit.io/odbeydnbj/fruity%20vegetbales/vankaya.avif?updatedAt=1752138225016"
   }
-]; // <--- Remove the closing '}' here
+];
 
 export default {
   async fetch(request) {
     const url = new URL(request.url);
 
+    // Make sure the path matches exactly what you expect
+    // If your worker is deployed at example.com/myworker, and you want to access
+    // the data at example.com/myworker/data/keywordsdata.json,
+    // then url.pathname would be /myworker/data/keywordsdata.json
+    // If you intend to access it directly at the root, e.g., example.com/data/keywordsdata.json,
+    // then the current check `url.pathname === "/data/keywordsdata.json"` is correct.
     if (url.pathname === "/data/keywordsdata.json") {
       return new Response(JSON.stringify(keywordsData), {
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          // Add CORS headers if you're fetching this from a different origin (e.g., a web application)
+          "Access-Control-Allow-Origin": "*", // Be more specific in production
+          "Access-Control-Allow-Methods": "GET, OPTIONS",
+          "Access-Control-Allow-Headers": "Content-Type",
+        },
       });
+    }
+
+    // You can also add a default response for the root path or other paths
+    if (url.pathname === "/") {
+        return new Response("Welcome to the keywords data API! Try accessing /data/keywordsdata.json", { status: 200 });
     }
 
     return new Response("Not Found", { status: 404 });
