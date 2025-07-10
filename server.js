@@ -1,4 +1,5 @@
-[
+// Replace this JSON object with your actual keywordsdata.json content
+const keywordsData = [ // <--- Remove the opening '{' here
   {
     "_id": {
       "$oid": "68593f1c1b010d7b8e345770"
@@ -538,4 +539,18 @@
     ],
     "image": "https://ik.imagekit.io/odbeydnbj/fruity%20vegetbales/vankaya.avif?updatedAt=1752138225016"
   }
-]
+]; // <--- Remove the closing '}' here
+
+export default {
+  async fetch(request) {
+    const url = new URL(request.url);
+
+    if (url.pathname === "/data/keywordsdata.json") {
+      return new Response(JSON.stringify(keywordsData), {
+        headers: { "Content-Type": "application/json" },
+      });
+    }
+
+    return new Response("Not Found", { status: 404 });
+  },
+};
