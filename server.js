@@ -1,5 +1,5 @@
 // Replace this JSON object with your actual keywordsdata.json content
-const keywordsData = {
+const keywordsData =
 [
   {
     "_id": {
@@ -890,8 +890,7 @@ const keywordsData = {
     ],
     "image": "https://ik.imagekit.io/odbeydnbj/leafyvegetbales/chukka%20kura.avif?updatedAt=1752136666495"
   }
-]
-};
+];
 
 export default {
   async fetch(request) {
