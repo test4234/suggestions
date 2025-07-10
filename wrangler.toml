@@ -1,3 +1,3 @@
-name = "keywords-worker"
+name = "keywords"
 main = "server.js"
 compatibility_date = "2025-07-10"
