@@ -178,7 +178,7 @@
     "_id": {
       "$oid": "68593f1c1b010d7b8e34576e"
     },
-    "product_id": "68593f1c1b010d7b8e34576e_prod",
+    "product_id": "68593f1c1b010d7b8e34576e",
     "name": "Bangaladumpa",
     "keywords": [
       "Potato",
